@@ -26,8 +26,8 @@ function createBar(number, barNo) {
     let height = number * 10;
     let y = 60 - height;
     let color = calcColor(1, 10, barNo);
-    barNo === chosenBar + 1 ? selected = "selected" : selected = "";
-    return `<rect class="${selected}" width="${width}" height="${height}"
+    barNo === chosenBar ? selected = "selected" : selected = "";
+    return `<rect class="${selected}" onclick="selectBar(${barNo})" width="${width}" height="${height}"
                         x="${x}" y="${y}" fill="${color}"></rect>`;
 }
 
