@@ -5,6 +5,8 @@ function show() {
     for (let i = 0; i < numbers.length; i++) {
         svgInnerHtml += createBar(numbers[i], i + 1);
     }
+    chosenBar ? disabled = "" : disabled = "disabled";
+    chosenBar ? "" : chosenBar = "ingen";
     contentDiv.innerHTML = `
         <svg id="chart" width="500" viewBox="0 0 80 60">
             ${svgInnerHtml}
@@ -14,8 +16,8 @@ function show() {
         Verdi:
         <input type="number" min="1" max="10" oninput="inputValue = this.value" />
         <button>Legg til stolpe</button>
-        <button disabled>Endre valgt stolpe</button><br />
-        <button disabled>Fjerne valgt stolpe</button>
+        <button ${disabled} onclick="editBar(${chosenBar})">Endre valgt stolpe</button><br />
+        <button ${disabled} onclick="removeBar(${chosenBar})">Fjerne valgt stolpe</button>
         `;
 }
 
@@ -26,8 +28,9 @@ function createBar(number, barNo) {
     let height = number * 10;
     let y = 60 - height;
     let color = calcColor(1, 10, barNo);
-    barNo === chosenBar ? selected = "selected" : selected = "";
-    return `<rect class="${selected}" onclick="selectBar(${barNo})" width="${width}" height="${height}"
+    let selectedClass;
+    barNo === chosenBar ? selectedClass = "selected" : selectedClass = "";
+    return `<rect class="${selectedClass}" onclick="selectBar(${barNo})" width="${width}" height="${height}"
                         x="${x}" y="${y}" fill="${color}"></rect>`;
 }
 
