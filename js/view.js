@@ -15,10 +15,13 @@ function show() {
         <br />
         Verdi:
         <input type="number" min="1" max="10" oninput="inputValue = this.value" />
-        <button>Legg til stolpe</button>
+        <button onclick="addBar(inputValue)">Legg til stolpe</button>
         <button ${disabled} onclick="editBar(${chosenBar})">Endre valgt stolpe</button><br />
         <button ${disabled} onclick="removeBar(${chosenBar})">Fjerne valgt stolpe</button>
         `;
+        const errorDiv = document.createElement("div");
+        errorDiv.setAttribute("id", "error-msg");
+        contentDiv.appendChild(errorDiv);
 }
 
 function createBar(number, barNo) {

@@ -2,3 +2,9 @@
     stroke: #000000;
     stroke-width: 1px;
 }
+
+#error-msg {
+    color: #ff0000;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+}
