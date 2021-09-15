@@ -6,7 +6,7 @@ function show() {
         svgInnerHtml += createBar(numbers[i], i + 1);
     }
     chosenBar ? disabled = "" : disabled = "disabled";
-    chosenBar ? "" : chosenBar = "ingen";
+    chosenBar = chosenBar ? chosenBar : chosenBar = "ingen";
     contentDiv.innerHTML = `
         <svg id="chart" width="500" viewBox="0 0 80 60">
             ${svgInnerHtml}
@@ -15,11 +15,18 @@ function show() {
         <br />
         Verdi:
         <input type="number" min="1" max="10" oninput="inputValue = this.value" />
-        <button onclick="addBar(inputValue)">Legg til stolpe</button>
+        <button onclick="addBar()">Legg til stolpe</button>
         <button ${disabled} onclick="editBar(${chosenBar})">Endre valgt stolpe</button><br />
         <button ${disabled} onclick="removeBar(${chosenBar})">Fjerne valgt stolpe</button>
         `;
-        const errorDiv = document.createElement("div");
+        if (error) {
+            errorMsg();
+        };
+}
+
+function errorMsg() {
+    const errorDiv = document.createElement("div");
+        errorDiv.innerHTML = "Feil: Kun verdi mellom 1-10.";
         errorDiv.setAttribute("id", "error-msg");
         contentDiv.appendChild(errorDiv);
 }
@@ -32,7 +39,7 @@ function createBar(number, barNo) {
     let y = 60 - height;
     let color = calcColor(1, 10, barNo);
     let selectedClass;
-    barNo === chosenBar ? selectedClass = "selected" : selectedClass = "";
+    selectedClass = barNo === chosenBar ? selectedClass = "selected" : selectedClass;
     return `<rect class="${selectedClass}" onclick="selectBar(${barNo})" width="${width}" height="${height}"
                         x="${x}" y="${y}" fill="${color}"></rect>`;
 }
