@@ -25,7 +25,7 @@ QUnit.test("Endre stolpe", function(assert) {
     inputValue = 4;
     numbers = [7, 3, 1, 5, 8];
     editBar(5);
-    assert.deepEqual(numbers, [7, 3, 1, 5, 4], "Verdi fra liste ble endret.");
+    assert.deepEqual(numbers, [7, 3, 1, 5, 4], "Verdi ble endret i liste.");
 });
 
 QUnit.test("Legg til stolpe", function(assert) {
